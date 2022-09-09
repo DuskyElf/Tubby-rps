@@ -11,16 +11,24 @@ public class App {
     public static void main (String[] args) {
         String player1 = ask_player_name("Player 1");
         String player2 = ask_player_name("Player 2"); 
+        
+        while (true) {
+            Gesture first = ask_input(player1);
+            Gesture second = ask_input(player2);
 
-        Gesture first = ask_input(player1);
-        Gesture second = ask_input(player2);
+            String winner = who_won(first, second, player1, player2);
 
-        String winner = who_won(first, second, player1, player2);
+            if (winner == null) {
+                JOptionPane.showMessageDialog(null, "It was a Draw, Whooo!", "Game Over!", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, winner + " won the game, Whooo!", "Game Over!", JOptionPane.INFORMATION_MESSAGE);
+            }
 
-        if (winner == null) {
-            JOptionPane.showMessageDialog(null, "It was a Draw, Whooo!", "Game Over!", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, winner + " won the game, Whooo!", "Game Over!", JOptionPane.INFORMATION_MESSAGE);
+            int restart = JOptionPane.showConfirmDialog(null, "Do you wanna play again?", "Restart", JOptionPane.YES_NO_OPTION);
+
+            if (restart != 0) {
+                break;
+            }
         }
     }
 
